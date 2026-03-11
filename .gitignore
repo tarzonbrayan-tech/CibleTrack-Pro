@@ -1,0 +1,11 @@
+# React
+node_modules/
+build/
+
+# Python
+__pycache__/
+venv/
+.env
+
+# Windows
+Thumbs.db
