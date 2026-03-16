@@ -23,8 +23,8 @@ def register():
     db = get_db_connection()
     cursor = db.cursor()
     try:
-        cursor.execute("INSERT INTO utilisateurs (nom, email, password, role) VALUES (%s, %s, %s, %s)",
-                       (data['nom'], data['email'], hashed_password, data['role']))
+        cursor.execute("INSERT INTO utilisateurs (nom, email, telephone, password, role) VALUES (%s, %s, %s, %s, %s)",
+                       (data['nom'], data['email'], data['telephone'], hashed_password, data['role']))
         db.commit()
         return jsonify({"message": "Utilisateur créé !"}), 201
     except:

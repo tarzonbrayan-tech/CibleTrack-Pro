@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardChef from './pages/DashboardChef';
 import DashboardSuperviseur from './pages/DashboardSuperviseur';
+import GestionProjets from './pages/GestionProjets'; // <--- AJOUTE ÇA
+import GestionSuperviseurs from './pages/GestionSuperviseurs'; // <--- AJOUTE ÇA
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
         
         {/* Page 404 si l'URL n'existe pas */}
         <Route path="*" element={<h2>404 - Page non trouvée</h2>} />
+
+        <Route path="/chef-dashboard" element={<DashboardChef />} />
+        <Route path="/gestion-projets" element={<GestionProjets />} />
+        <Route path="/gestion-superviseurs" element={<GestionSuperviseurs />} />
       </Routes>
     </Router>
   );

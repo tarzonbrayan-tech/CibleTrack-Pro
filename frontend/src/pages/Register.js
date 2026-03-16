@@ -3,7 +3,7 @@ import { Eye, EyeOff } from 'lucide-react'; // Import des icônes
 import axios from 'axios';
 
 const Register = () => {
-    const [formData, setFormData] = useState({ nom: '', email: '', password: '', role: 'superviseur' });
+    const [formData, setFormData] = useState({ nom: '', email: '', telephone: '', password: '', role: 'superviseur' });
     
     // ÉTAT POUR VISIBILITÉ DU MOT DE PASSE
     const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +34,10 @@ const Register = () => {
                 {/* Champ Email */}
                 <input type="email" placeholder="Email" className="form-control mb-3" 
                     onChange={(e) => setFormData({...formData, email: e.target.value})} />
+
+                {/* Champ Téléphone */}
+                <input type="tel" placeholder="Numéro de téléphone" className="form-control mb-3" 
+                    onChange={(e) => setFormData({...formData, telephone: e.target.value})} />  
 
                 {/* Champ MOT DE PASSE AVEC ŒIL */}
                 <div className="position-relative mb-3">
