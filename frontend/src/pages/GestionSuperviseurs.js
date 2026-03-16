@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, UserPlus, Search, User, Phone, Mail, Trash2, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, UserPlus, Search, User, Phone, Mail, Trash2, ShieldCheck, Star } from 'lucide-react';
 
 const GestionSuperviseurs = () => {
   const navigate = useNavigate();
@@ -81,6 +81,13 @@ const GestionSuperviseurs = () => {
                       </button>
                       <button className="btn btn-sm btn-outline-danger" onClick={() => setSuperviseurs(superviseurs.filter(item => item.id !== s.id))}>
                         <Trash2 size={16} />
+                      </button>
+                      <button 
+                              className="btn btn-sm btn-outline-success" 
+                                                                         title="Évaluer" 
+                                                                        onClick={() => navigate('/evaluation-superviseur')}
+>
+                        <Star size={16} />
                       </button>
                     </div>
                   </td>

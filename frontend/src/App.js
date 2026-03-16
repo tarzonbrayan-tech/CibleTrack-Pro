@@ -8,6 +8,8 @@ import DashboardChef from './pages/DashboardChef';
 import DashboardSuperviseur from './pages/DashboardSuperviseur';
 import GestionProjets from './pages/GestionProjets'; // <--- AJOUTE ÇA
 import GestionSuperviseurs from './pages/GestionSuperviseurs'; // <--- AJOUTE ÇA
+import EvaluationSuperviseur from './pages/EvaluationSuperviseur';
+import GestionEnqueteurs from './pages/GestionEnqueteurs';
 
 function App() {
   return (
@@ -30,6 +32,9 @@ function App() {
         <Route path="/chef-dashboard" element={<DashboardChef />} />
         <Route path="/gestion-projets" element={<GestionProjets />} />
         <Route path="/gestion-superviseurs" element={<GestionSuperviseurs />} />
+        <Route path="/evaluation-superviseur" element={<EvaluationSuperviseur />} />
+        <Route path="/superviseur-dashboard" element={<DashboardSuperviseur />} />
+        <Route path="/gestion-enqueteurs" element={<GestionEnqueteurs />} />
       </Routes>
     </Router>
   );
