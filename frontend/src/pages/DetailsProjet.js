@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Target, Clock, Users, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Target, Clock, Calendar } from 'lucide-react';
 
 const DetailsProjet = () => {
   const navigate = useNavigate();
@@ -8,61 +8,75 @@ const DetailsProjet = () => {
   // Données de simulation pour la fiche détail
   const projet = {
     nom: "Enquête Satisfaction SABC",
-    objectif: "Évaluer le niveau de satisfaction des consommateurs concernant la nouvelle gamme de boissons gazeuses sur le marché de Douala et Yaoundé.",
+    objectif: "Évaluer le niveau de satisfaction des consommateurs concernant la nouvelle gamme de boissons gazeuses sur le marché de Douala et Yaoundé. L'étude doit identifier les points forts du packaging et les attentes en termes de goût pour les 18-35 ans.",
     duree: "Du 15 Mars au 15 Avril 2026",
-    enqueteurs: [
-      { id: 1, nom: "Paul Biya", role: "Agent Terrain" },
-      { id: 2, nom: "Marie Ngo", role: "Agent Terrain" },
-      { id: 3, nom: "Jean Marc", role: "Vérificateur" }
-    ]
+    delai: "30 jours calendaires"
   };
 
   return (
     <div className="container py-5">
-      <div className="d-flex align-items-center gap-3 mb-4">
-        <button className="btn btn-outline-primary" onClick={() => navigate('/projets-assignes')}>
+      {/* Bouton retour et Titre */}
+      <div className="d-flex align-items-center gap-3 mb-5">
+        <button className="btn btn-outline-primary shadow-sm" onClick={() => navigate('/projets-assignes')}>
           <ArrowLeft size={20} />
         </button>
         <h1 className="h2 mb-0">Détails de la Mission</h1>
       </div>
 
-      <div className="row g-4">
-        {/* Colonne de Gauche : Objectifs et Durée */}
-        <div className="col-lg-7">
-          <div className="card shadow-sm border-0 p-4 mb-4">
-            <h4 className="fw-bold d-flex align-items-center gap-2 mb-3">
-              <Target className="text-primary" /> Objectifs de l'enquête
-            </h4>
-            <p className="text-muted fs-5 leading-relaxed">
-              {projet.objectif}
-            </p>
-            <hr />
-            <div className="d-flex align-items-center gap-3 text-dark mt-3">
-              <Clock className="text-primary" />
-              <div>
-                <span className="small text-muted d-block">Période de collecte</span>
-                <span className="fw-bold">{projet.duree}</span>
+      <div className="row justify-content-center">
+        <div className="col-lg-9">
+          <div className="card shadow-sm border-0 overflow-hidden">
+            {/* Header de la carte avec le nom du projet */}
+            <div className="card-header bg-primary text-white py-3 px-4">
+              <h3 className="h5 mb-0 fw-bold">{projet.nom}</h3>
+            </div>
+
+            <div className="card-body p-4 p-md-5">
+              {/* Section Objectifs */}
+              <div className="mb-5">
+                <h4 className="fw-bold d-flex align-items-center gap-2 mb-4 text-dark">
+                  <Target className="text-primary" size={24} /> 
+                  Objectifs de l'enquête
+                </h4>
+                <p className="text-muted fs-5 lh-base bg-light p-4 rounded-3 border-start border-primary border-4">
+                  {projet.objectif}
+                </p>
+              </div>
+
+              <hr className="my-5 opacity-10" />
+
+              {/* Section Temps et Durée */}
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                      <Calendar size={24} />
+                    </div>
+                    <div>
+                      <span className="small text-muted d-block text-uppercase fw-bold">Période de collecte</span>
+                      <span className="fw-bold fs-5">{projet.duree}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="bg-info bg-opacity-10 p-3 rounded-circle text-info">
+                      <Clock size={24} />
+                    </div>
+                    <div>
+                      <span className="small text-muted d-block text-uppercase fw-bold">Délai imparti</span>
+                      <span className="fw-bold fs-5">{projet.delai}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Colonne de Droite : Équipe Assignée */}
-        <div className="col-lg-5">
-          <div className="card shadow-sm border-0 p-4 h-100">
-            <h4 className="fw-bold d-flex align-items-center gap-2 mb-4">
-              <Users className="text-primary" /> Équipe d'enquêteurs
-            </h4>
-            <div className="list-group list-group-flush">
-              {projet.enqueteurs.map(e => (
-                <div key={e.id} className="list-group-item px-0 d-flex justify-content-between align-items-center border-light">
-                  <div>
-                    <div className="fw-bold">{e.nom}</div>
-                    <small className="text-muted">{e.role}</small>
-                  </div>
-                  <CheckCircle2 size={18} className="text-success" />
-                </div>
-              ))}
+            {/* Pied de page informatif */}
+            <div className="card-footer bg-light py-3 px-4 border-0 text-center">
+              <small className="text-muted italic">
+                Informations transmises par la Direction Technique - CIBLETRACK PRO
+              </small>
             </div>
           </div>
         </div>
