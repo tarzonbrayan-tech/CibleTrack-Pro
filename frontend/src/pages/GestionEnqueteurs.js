@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, UserPlus, Search, Smartphone, User, Trash2, CheckCircle } from 'lucide-react';
+import { ArrowLeft, UserPlus, Search, Smartphone, User, Trash2, Star, History, MoreVertical, Filter, CheckCircle } from 'lucide-react';
 
 const GestionEnqueteurs = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const GestionEnqueteurs = () => {
         <button className="btn btn-outline-primary" onClick={() => navigate('/superviseur-dashboard')}>
           <ArrowLeft size={20} />
         </button>
-        <h1 className="h2 mb-0 text-primary">Gestion des Enquêteurs</h1>
+        <h1 className="mb-4 text-primary">Gestion & Evaluation de Performance des Enquêteurs</h1>
       </div>
 
       <div className="card shadow-sm border-0 p-4">
@@ -83,6 +83,65 @@ const GestionEnqueteurs = () => {
             </tbody>
           </table>
         </div>
+      </div>
+      {/* Barre de Filtres Avancés */}
+      <div className="card border-0 shadow-sm p-3 mb-4 bg-light">
+        <div className="row g-2">
+          <div className="col-md-3">
+            <select className="form-select"><option>Genre (Tous)</option><option>Masculin</option><option>Féminin</option></select>
+          </div>
+          <div className="col-md-3">
+            <select className="form-select"><option>Niveau d'études</option><option>Bac+3</option><option>Bac+5</option></select>
+          </div>
+          <div className="col-md-3">
+            <select className="form-select"><option>Expérience</option><option>Débutant</option><option>Expert</option></select>
+          </div>
+          <div className="col-md-3">
+            <button className="btn btn-dark w-100 d-flex align-items-center justify-content-center gap-2">
+              <Filter size={18}/> Filtrer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="card border-0 shadow-sm">
+        <table className="table align-middle mb-0">
+          <thead className="table-dark">
+            <tr>
+              <th>Nom / Domaine</th>
+              <th>Changer Statut</th>
+              <th className="text-center">Évaluer</th>
+              <th className="text-center">Historique</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div className="fw-bold">Paul Biya</div>
+                <div className="small text-muted">Sciences Sociales</div>
+              </td>
+              <td>
+                <select className="form-select form-select-sm w-auto border-primary">
+                  <option value="bien">Bien</option>
+                  <option value="disponible">Disponible</option>
+                  <option value="indisponible">Indisponible</option>
+                  <option value="blamer text-warning">Blâmer</option>
+                  <option value="exclus text-danger">Exclus</option>
+                </select>
+              </td>
+              <td className="text-center">
+                <button className="btn btn-sm btn-warning" onClick={() => navigate('/evaluation-enqueteur')}>
+                  <Star size={18} fill="white" />
+                </button>
+              </td>
+              <td className="text-center">
+                <button className="btn btn-sm btn-outline-info" title="Voir performances précédentes">
+                  <History size={18} />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

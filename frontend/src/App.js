@@ -10,6 +10,9 @@ import GestionProjets from './pages/GestionProjets'; // <--- AJOUTE ÇA
 import GestionSuperviseurs from './pages/GestionSuperviseurs'; // <--- AJOUTE ÇA
 import EvaluationSuperviseur from './pages/EvaluationSuperviseur';
 import GestionEnqueteurs from './pages/GestionEnqueteurs';
+import EvaluationEnqueteur from './pages/EvaluationEnqueteur';
+import ProjetsAssignes from './pages/ProjetsAssignes';
+import DetailsProjet from './pages/DetailsProjet';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path="/evaluation-superviseur" element={<EvaluationSuperviseur />} />
         <Route path="/superviseur-dashboard" element={<DashboardSuperviseur />} />
         <Route path="/gestion-enqueteurs" element={<GestionEnqueteurs />} />
+        <Route path="/evaluation-enqueteur" element={<EvaluationEnqueteur />} />
+        <Route path="/projets-assignes" element={<ProjetsAssignes />} />
+        <Route path="/details-projet" element={<DetailsProjet />} />
       </Routes>
     </Router>
   );
