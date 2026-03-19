@@ -1,52 +1,60 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserCircle, Briefcase, Users, LogOut } from 'lucide-react';
+import { LayoutDashboard, FolderCanvas, Users, UserCheck, LogOut, Shield, UserCircle } from 'lucide-react';
 
 const DashboardChef = () => {
   const navigate = useNavigate();
 
-  // Données de démonstration pour la maquette
-  const stats = {
+  // Statistiques globales (Maquette)
+  const globalStats = {
     nbProjets: 5,
-    nbSuperviseurs: 3
+    nbSuperviseurs: 3,
+    nbEnqueteursTotal: 24 // Cumul de tous les enquêteurs créés par les superviseurs
   };
 
   return (
     <div className="min-vh-100 bg-light">
-      {/* Barre de navigation haute */}
+      {/* Navbar principale avec Modification Profil et Déconnexion Rouge */}
       <nav className="navbar navbar-dark bg-dark px-4 py-3 shadow">
-        <span className="navbar-brand fw-bold fs-3">CIBLETRACK PRO</span>
+        <span className="navbar-brand fw-bold fs-3 text-white">CIBLETRACK PRO</span>
+        
         <div className="d-flex align-items-center gap-3">
+          {/* BOUTON MODIFIER PROFIL */}
           <button 
             className="btn btn-outline-light d-flex align-items-center gap-2"
             onClick={() => alert("Aller vers modification profil")}
           >
             <UserCircle size={20} /> Modifier mon profil
           </button>
-          <button className="btn btn-danger btn-sm" onClick={() => navigate('/login')}>
-            <LogOut size={18} />
+
+          {/* BOUTON DÉCONNEXION ROUGE */}
+          <button 
+            className="btn btn-danger d-flex align-items-center gap-2 shadow-sm" 
+            onClick={() => navigate('/login')}
+          >
+            <LogOut size={18} /> Déconnexion
           </button>
         </div>
       </nav>
 
       <div className="container py-5">
-        <h1 className="mb-5 text-center">Bienvenue, <span className="text-primary">Chef de Projet</span></h1>
+        <h1 className="mb-5 text-center fw-bold text-dark">Bienvenue, <span className="text-primary">Chef de Projet</span></h1>
 
-        {/* Zone des deux fenêtres latérales au centre */}
-        <div className="row justify-content-center g-4">
+        {/* Disposition des 3 fenêtres LATÉRALEMENT */}
+        <div className="row g-4 justify-content-center">
           
-          {/* Fenêtre PROJETS */}
-          <div className="col-md-5">
-            <div className="card shadow-sm border-0 h-100 text-center p-4">
-              <div className="card-body">
+          {/* Fenêtre 1 : PROJETS */}
+          <div className="col-md-4">
+            <div className="card shadow border-0 h-100 text-center p-4">
+              <div className="card-body d-flex flex-column">
                 <div className="text-primary mb-3">
-                  <Briefcase size={48} />
+                  <LayoutDashboard size={50} strokeWidth={1.5} />
                 </div>
-                <h3 className="card-title">Projets</h3>
-                <p className="display-4 fw-bold">{stats.nbProjets}</p>
-                <p className="text-muted">Projets créés à ce jour</p>
+                <h3 className="fw-bold">Projets</h3>
+                <p className="display-4 fw-bold text-dark">{globalStats.nbProjets}</p>
+                <p className="text-muted">Projets créés et à ce jour</p>
                 <button 
-                  className="btn btn-primary w-100 py-2 mt-3"
+                  className="btn btn-primary w-100 py-2 mt-auto fw-bold"
                   onClick={() => navigate('/gestion-projets')}
                 >
                   Gérer vos projets
@@ -55,18 +63,18 @@ const DashboardChef = () => {
             </div>
           </div>
 
-          {/* Fenêtre SUPERVISEURS */}
-          <div className="col-md-5">
-            <div className="card shadow-sm border-0 h-100 text-center p-4">
-              <div className="card-body">
-                <div className="text-info mb-3">
-                  <Users size={48} />
+          {/* Fenêtre 2 : SUPERVISEURS */}
+          <div className="col-md-4">
+            <div className="card shadow border-0 h-100 text-center p-4">
+              <div className="card-body d-flex flex-column">
+                <div className="text-success mb-3">
+                  <Shield size={50} strokeWidth={1.5} />
                 </div>
-                <h3 className="card-title">Superviseurs</h3>
-                <p className="display-4 fw-bold">{stats.nbSuperviseurs}</p>
+                <h3 className="fw-bold">Superviseurs</h3>
+                <p className="display-4 fw-bold text-dark">{globalStats.nbSuperviseurs}</p>
                 <p className="text-muted">Superviseurs enregistrés</p>
                 <button 
-                  className="btn btn-primary w-100 py-2 mt-3"
+                  className="btn btn-primary w-100 py-2 mt-auto fw-bold"
                   onClick={() => navigate('/gestion-superviseurs')}
                 >
                   Gérer vos superviseurs
@@ -74,7 +82,27 @@ const DashboardChef = () => {
               </div>
             </div>
           </div>
-          
+
+          {/* Fenêtre 3 : ENQUÊTEURS (NOUVELLE) */}
+          <div className="col-md-4">
+            <div className="card shadow border-0 h-100 text-center p-4 border-bottom border-info border-4">
+              <div className="card-body d-flex flex-column">
+                <div className="text-info mb-3">
+                  <Users size={50} strokeWidth={1.5} />
+                </div>
+                <h3 className="fw-bold">Enquêteurs</h3>
+                <p className="display-4 fw-bold text-dark">{globalStats.nbEnqueteursTotal}</p>
+                <p className="text-muted">Enquêteurs créés par les superviseurs</p>
+                <button 
+                  className="btn btn-primary w-100 py-2 mt-auto fw-bold"
+                  onClick={() => navigate('/suivi-global-enqueteurs')}
+                >
+                  Voir les enquêteurs
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

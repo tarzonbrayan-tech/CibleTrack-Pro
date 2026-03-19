@@ -13,6 +13,7 @@ import GestionEnqueteurs from './pages/GestionEnqueteurs';
 import EvaluationEnqueteur from './pages/EvaluationEnqueteur';
 import ProjetsAssignes from './pages/ProjetsAssignes';
 import DetailsProjet from './pages/DetailsProjet';
+import SuiviProjetChef from './pages/SuiviProjetChef';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/evaluation-enqueteur" element={<EvaluationEnqueteur />} />
         <Route path="/projets-assignes" element={<ProjetsAssignes />} />
         <Route path="/details-projet" element={<DetailsProjet />} />
+        <Route path="/suivi-projet/:id" element={<SuiviProjetChef />} />
       </Routes>
     </Router>
   );

@@ -12,8 +12,8 @@ const GestionProjets = () => {
 
   // Données de démonstration pour la maquette
   const [projets, setProjets] = useState([
-  { id: 1, nom: "Enquête Satisfaction SABC", client: "Brasseries du Cameroun", chef: "Jean Dupont", date: "12/03/2026", statut: "En cours" },
-  { id: 2, nom: "Audit Qualité Orange", client: "Orange CM", chef: "Marie Sali", date: "15/03/2026", statut: "En attente" },
+  { id: 1, nom: "Enquête Satisfaction SABC", client: "Brasseries du Cameroun", date: "12/03/2026", statut: "En cours" },
+  { id: 2, nom: "Audit Qualité Orange", client: "Orange CM", date: "15/03/2026", statut: "En attente" },
 ]);
    
    // Fonction pour ouvrir la confirmation
@@ -56,7 +56,7 @@ const GestionProjets = () => {
               <input 
                 type="text" 
                 className="form-control border-start-0" 
-                placeholder="Rechercher un projet ou un chef..." 
+                placeholder="Rechercher un projet" 
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
@@ -75,7 +75,7 @@ const GestionProjets = () => {
               <tr>
                 <th>Nom du Projet</th>
                 <th>Client</th>
-                <th>Chef Responsable</th>
+
                 <th>Date Début</th>
                 <th>Statut</th>
                 <th className="text-center">Actions</th>
@@ -84,13 +84,13 @@ const GestionProjets = () => {
             <tbody>
               {projetsFiltrés.map(projet => (
                 <tr key={projet.id}>
-                  <td className="fw-bold text-dark">{projet.nom}</td>
-                  <td>{projet.client}</td>
-                  <td>
-                    <span className="badge bg-light text-dark border">
-                      {projet.chef}
-                    </span>
+                  <td className="fw-bold text-primary" 
+                      style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                      onClick={() => navigate(`/suivi-projet/${projet.id}`)}>
+                    {projet.nom}
                   </td>
+                  <td>{projet.client}</td>
+                  
                   <td>{projet.date}</td>
                   <td>
                     <span className={`badge ${projet.statut === 'En cours' ? 'bg-success' : 'bg-warning text-dark'}`}>

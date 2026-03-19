@@ -15,7 +15,7 @@ const DashboardSuperviseur = () => {
     <div className="min-vh-100 bg-light">
       {/* Barre de navigation haute */}
       <nav className="navbar navbar-dark bg-primary px-4 py-3 shadow">
-        <span className="navbar-brand fw-bold fs-3">CIBLETRACK PRO | Superviseur</span>
+        <span className="navbar-brand fw-bold fs-3">CIBLETRACK PRO</span>
         <div className="d-flex align-items-center gap-3">
           <button 
             className="btn btn-outline-light d-flex align-items-center gap-2"
