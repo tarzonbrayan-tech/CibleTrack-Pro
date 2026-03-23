@@ -72,14 +72,17 @@ const GestionProjets = () => {
               <input 
                 type="text" 
                 className="form-control border-start-0" 
-                placeholder="Rechercher par nom ou client..." 
+                placeholder="Rechercher un projet" 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
           <div className="col-md-4 text-md-end">
-            <button className="btn btn-primary d-flex align-items-center gap-2 ms-auto fw-bold">
+            <button 
+              className="btn btn-primary d-flex align-items-center gap-2 ms-auto fw-bold shadow-sm"
+              onClick={() => navigate('/creer-projet')} // Redirection vers la nouvelle page
+            >
               <Plus size={18} /> Nouveau Projet
             </button>
           </div>

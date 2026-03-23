@@ -18,8 +18,8 @@ const DashboardSuperviseur = () => {
         <span className="navbar-brand fw-bold fs-3">CIBLETRACK PRO</span>
         <div className="d-flex align-items-center gap-3">
           <button 
-            className="btn btn-outline-light d-flex align-items-center gap-2"
-            onClick={() => alert("Aller vers modification profil")}
+            className="btn btn-outline-light d-flex align-items-center gap-2 shadow-sm"
+            onClick={() => navigate('/modifier-profil')} // <--- Vérifie bien ce chemin
           >
             <UserCircle size={20} /> Modifier mon profil
           </button>

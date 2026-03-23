@@ -7,8 +7,8 @@ const DashboardChef = () => {
 
   // Statistiques globales (Maquette)
   const globalStats = {
-    nbProjets: 5,
-    nbSuperviseurs: 3,
+    nbProjets: 4,
+    nbSuperviseurs: 2,
     nbEnqueteursTotal: 24 // Cumul de tous les enquêteurs créés par les superviseurs
   };
 
@@ -21,8 +21,8 @@ const DashboardChef = () => {
         <div className="d-flex align-items-center gap-3">
           {/* BOUTON MODIFIER PROFIL */}
           <button 
-            className="btn btn-outline-light d-flex align-items-center gap-2"
-            onClick={() => alert("Aller vers modification profil")}
+            className="btn btn-outline-light d-flex align-items-center gap-2 shadow-sm"
+            onClick={() => navigate('/modifier-profil')} // <--- Vérifie bien ce chemin
           >
             <UserCircle size={20} /> Modifier mon profil
           </button>
