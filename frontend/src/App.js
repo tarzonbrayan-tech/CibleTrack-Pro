@@ -14,6 +14,7 @@ import EvaluationEnqueteur from './pages/EvaluationEnqueteur';
 import ProjetsAssignes from './pages/ProjetsAssignes';
 import DetailsProjet from './pages/DetailsProjet';
 import SuiviProjetChef from './pages/SuiviProjetChef';
+import ModifierProjet from './pages/ModifierProjet';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/projets-assignes" element={<ProjetsAssignes />} />
         <Route path="/details-projet" element={<DetailsProjet />} />
         <Route path="/suivi-projet/:id" element={<SuiviProjetChef />} />
+        <Route path="/modifier-projet/:id" element={<ModifierProjet />} />
       </Routes>
     </Router>
   );

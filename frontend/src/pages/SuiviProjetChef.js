@@ -12,7 +12,7 @@ const SuiviProjetChef = () => {
     enqueteurs: [
       { id: 201, nom: "Paul Biya", statut: "Actif" },
       { id: 202, nom: "Marie Ngo", statut: "Actif" },
-      { id: 203, nom: "Jean Marc", statut: "En pause" }
+      { id: 203, nom: "Jean Marc", statut: "Actif" }
     ]
   };
 
