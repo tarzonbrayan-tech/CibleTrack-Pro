@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; // <--- AJOUTE ÇA ICI
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Importation de tes pages
@@ -19,6 +19,23 @@ import ModifierProfil from './pages/ModifierProfil';
 import CreerProjet from './pages/CreerProjet';
 
 function App() {
+  // LA SOURCE DE VÉRITÉ UNIQUE
+  const [projets, setProjets] = useState([
+    { id: 1, nom: "Enquête Satisfaction SABC", client: "Brasseries du Cameroun", date: "12/03/2026", statut: "Terminé" },
+    { id: 2, nom: "Audit Qualité Orange", client: "Orange CM", date: "15/03/2026", statut: "Disponible" },
+    { id: 3, nom: "Test Produit Nestlé", client: "Nestlé", date: "20/03/2026", statut: "Disponible" },
+    { id: 4, nom: "Sondage Élections", client: "Gouv", date: "01/01/2026", statut: "En cours" },
+  ]);
+
+  // Fonction pour ajouter un projet
+  const ajouterProjet = (nouveau) => {
+    setProjets([...projets, { ...nouveau, id: projets.length + 1 }]);
+  };
+
+  // Fonction pour supprimer un projet
+  const supprimerProjet = (id) => {
+    setProjets(projets.filter(p => p.id !== id));
+  };
   return (
     <Router>
       <Routes>
@@ -49,6 +66,10 @@ function App() {
         <Route path="/modifier-projet/:id" element={<ModifierProjet />} />
         <Route path="/modifier-profil" element={<ModifierProfil />} />
         <Route path="/creer-projet" element={<CreerProjet />} />
+        <Route 
+  path="/gestion-projets" 
+  element={<GestionProjets projets={projets} supprimerProjet={supprimerProjet} />} 
+/>
       </Routes>
     </Router>
   );

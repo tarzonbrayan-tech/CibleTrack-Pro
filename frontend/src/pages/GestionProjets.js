@@ -2,28 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, Search, Edit3, AlertTriangle, Trash2, Filter, ClipboardList } from 'lucide-react';
 
-const GestionProjets = () => {
+const GestionProjets = ({ projets = [], supprimerProjet }) => { 
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  
-  // NOUVEL ÉTAT POUR LE FILTRE PAR STATUT
+
   const [filterStatus, setFilterStatus] = useState("tous");
 
   // ÉTATS POUR LA SUPPRESSION
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
 
-  // Données de démonstration mises à jour avec tes nouveaux statuts
-  const [projets, setProjets] = useState([
-    { id: 1, nom: "Enquête Satisfaction SABC", client: "Brasseries du Cameroun", date: "12/03/2026", statut: "Terminé" },
-    { id: 2, nom: "Audit Qualité Orange", client: "Orange CM", date: "15/03/2026", statut: "Disponible" },
-    { id: 3, nom: "Test Produit Nestlé", client: "Nestlé", date: "20/03/2026", statut: "Disponible" },
-    { id: 4, nom: "Sondage Élections", client: "Gouv", date: "01/01/2026", statut: "En cours" },
-  ]);
+
 
   // Fonction pour les couleurs des badges
   const getBadgeClass = (statut) => {
-    switch (statut.toLowerCase()) {
+    switch (statut?.toLowerCase()) {
       case 'terminé': return 'bg-secondary text-white'; // Gris
       case 'en cours': return 'bg-success text-white';   // Vert
       case 'en attente': return 'bg-warning text-dark';  // Jaune
@@ -38,19 +31,17 @@ const GestionProjets = () => {
   };
 
   const handleDelete = () => {
-    setProjets(projets.filter(p => p.id !== projectToDelete.id));
+   supprimerProjet(projectToDelete.id); // ✅ On utilise la fonction de App.js
     setShowDeleteModal(false);
     setProjectToDelete(null);
   };
 
-  // LOGIQUE DE FILTRAGE MISE À JOUR (Recherche + Boutons Statut)
-  const projetsFiltrés = projets.filter(p => {
-    const matchRecherche = p.nom.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                           p.client.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchStatut = filterStatus === "tous" || p.statut.toLowerCase() === filterStatus.toLowerCase();
-    
-    return matchRecherche && matchStatut;
-  });
+  // On utilise directement 'projets' (venant d'App.js) pour le filtrage
+  const projetsFiltrés = projets?.filter(p => {
+  const matchRecherche = p.nom?.toLowerCase().includes(searchTerm.toLowerCase());
+  const matchStatut = filterStatus === "tous" || p.statut?.toLowerCase() === filterStatus.toLowerCase();
+  return matchRecherche && matchStatut;
+}) || [];
 
   return (
     <div className="container py-5">
@@ -145,7 +136,10 @@ const GestionProjets = () => {
                       >
                         <Edit3 size={16} />
                       </button>
-                      <button className="btn btn-sm btn-outline-danger" title="Supprimer" onClick={() => confirmDelete(projet)}>
+                      <button 
+                        className="btn btn-sm btn-outline-danger border-0" 
+                        onClick={() => supprimerProjet(projet.id)} // <--- Utilise la prop ici
+                      >
                         <Trash2 size={16} />
                       </button>
                     </div>

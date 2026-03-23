@@ -1,32 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // Assure-toi que useState est importé
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save, X, FolderPlus, Building, Calendar } from 'lucide-react';
 
-const CreerProjet = () => {
+const CreerProjet = ({ ajouterProjet }) => { // On reçoit bien la prop ici
   const navigate = useNavigate();
 
-  // État initial du nouveau projet
+  // --- CE BLOC DOIT ÊTRE PRÉSENT POUR CORRIGER L'ERREUR ---
   const [nouveauProjet, setNouveauProjet] = useState({
     nom: "",
     client: "",
-    date: new Date().toLocaleDateString('fr-FR'), // Date du jour par défaut
-    statut: "Disponible" // Statut par défaut (Rouge selon tes critères)
+    date: new Date().toLocaleDateString('en-CA'), // Format YYYY-MM-DD pour l'input date
+    statut: "Disponible"
   });
 
   const handleChange = (e) => {
+    // C'est ici que 'setNouveauProjet' est utilisé
     setNouveauProjet({ ...nouveauProjet, [e.target.name]: e.target.value });
   };
 
   const handleCreate = (e) => {
     e.preventDefault();
-
-    // Logique de sauvegarde (Simulation)
-    console.log("Nouveau projet créé :", nouveauProjet);
-    
-    // Ici, dans une vraie application, tu ferais un POST vers ton API
-    alert(`Le projet "${nouveauProjet.nom}" a été créé avec succès !`);
-    
-    // Retour à la liste des projets
+    // On envoie le projet fini à App.js
+    ajouterProjet(nouveauProjet); 
+    alert(`Le projet "${nouveauProjet.nom}" a été créé !`);
     navigate('/gestion-projets');
   };
 
