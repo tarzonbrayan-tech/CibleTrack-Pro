@@ -26,9 +26,9 @@ function Login() {
 
         // 2. Redirection automatique selon le rôle reçu de Python
         if (response.data.role === 'chef') {
-          navigate('/chef');
+          navigate('/chef-dashboard'); // <--- Ajoute "-dashboard" ici
         } else if (response.data.role === 'superviseur') {
-          navigate('/superviseur');
+          navigate('/superviseur-dashboard'); // <--- Ajoute "-dashboard" ici
         }
       }
     } catch (error) {

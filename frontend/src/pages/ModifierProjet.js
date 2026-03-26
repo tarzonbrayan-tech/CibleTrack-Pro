@@ -1,95 +1,134 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Save, X, ClipboardEdit } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Save, X, Edit3, Building, Calendar } from 'lucide-react';
 
-const ModifierProjet = () => {
-  const navigate = useNavigate();
+const ModifierProjet = ({ projets, modifierProjet }) => {
   const { id } = useParams(); // Récupère l'ID depuis l'URL
+  const navigate = useNavigate();
 
-  // État du formulaire
-  const [nom, setNom] = useState("");
-  const [statut, setStatut] = useState("");
+  // État local pour le formulaire
+  const [formData, setFormData] = useState({
+    id: null,
+    nom: "",
+    client: "",
+    date: "",
+    statut: ""
+  });
 
-  // Simulation de récupération des données existantes
+  // Charger les données du projet au montage du composant
   useEffect(() => {
-    // Ici, tu ferais normalement un appel API ou une recherche dans ton état global
-    // Pour la maquette, on simule des données reçues :
-    if (id === "1") {
-      setNom("Enquête Satisfaction SABC");
-      setStatut("En cours");
-    } else if (id === "2") {
-      setNom("Audit Qualité Orange");
-      setStatut("En attente");
+    const projetAEditer = projets.find(p => p.id === parseInt(id));
+    if (projetAEditer) {
+      setFormData(projetAEditer);
+    } else {
+      // Si le projet n'existe pas, on redirige
+      navigate('/gestion-projets');
     }
-  }, [id]);
+  }, [id, projets, navigate]);
 
-  const handleSave = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = (e) => {
     e.preventDefault();
-    // Logique pour enregistrer (Update)
-    console.log("Enregistrement :", { id, nom, statut });
-    alert("Modifications enregistrées avec succès !");
+    modifierProjet(formData); // Appel de la fonction globale
+    alert("Projet mis à jour avec succès !");
     navigate('/gestion-projets');
   };
 
   return (
     <div className="container py-5">
-      {/* Retour rapide */}
       <div className="d-flex align-items-center gap-3 mb-5">
-        <button className="btn btn-outline-secondary shadow-sm" onClick={() => navigate('/gestion-projets')}>
-          <ArrowLeft size={20} />
+        <button className="btn btn-outline-dark shadow-sm rounded-circle p-2" onClick={() => navigate('/gestion-projets')}>
+          <ArrowLeft size={24} />
         </button>
-        <h1 className="h2 mb-0 fw-bold text-dark">Modifier le Projet</h1>
+        <div>
+          <h1 className="h2 mb-0 fw-bold">Modifier le Projet</h1>
+          <p className="text-muted mb-0">Identifiant du projet : #{id}</p>
+        </div>
       </div>
 
       <div className="row justify-content-center">
-        <div className="col-lg-6">
-          <div className="card shadow border-0 p-4 p-md-5">
-            <div className="text-center mb-4">
-              <div className="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block text-primary mb-3">
-                <ClipboardEdit size={40} />
+        <div className="col-lg-7">
+          <div className="card shadow border-0 p-4 p-md-5 bg-white">
+            <div className="text-center mb-5">
+              <div className="bg-info bg-opacity-10 p-4 rounded-circle d-inline-block text-info mb-3">
+                <Edit3 size={45} />
               </div>
-              <p className="text-muted">ID du projet : <span className="fw-bold">#{id}</span></p>
             </div>
 
-            <form onSubmit={handleSave}>
-              {/* CHAMP NOM DU PROJET */}
+            <form onSubmit={handleUpdate}>
               <div className="mb-4">
-                <label className="form-label fw-bold small text-uppercase">Nom du projet</label>
-                <input 
-                  type="text" 
-                  className="form-control form-control-lg border-primary border-opacity-25" 
-                  value={nom}
-                  onChange={(e) => setNom(e.target.value)}
-                  required
-                />
+                <label className="form-label fw-bold text-muted small text-uppercase">Nom du Projet</label>
+                <div className="input-group">
+                  <span className="input-group-text bg-light border-end-0"><Edit3 size={18} /></span>
+                  <input 
+                    type="text" 
+                    name="nom"
+                    className="form-control form-control-lg border-start-0 bg-light shadow-none" 
+                    value={formData.nom}
+                    onChange={handleChange}
+                    required 
+                  />
+                </div>
               </div>
 
-              {/* CHAMP STATUT */}
-              <div className="mb-5">
-                <label className="form-label fw-bold small text-uppercase">Statut actuel</label>
-                <select 
-                  className="form-select form-select-lg border-primary border-opacity-25"
-                  value={statut}
-                  onChange={(e) => setStatut(e.target.value)}
-                >
-                  <option value="Disponible">Disponible</option>
-                  <option value="En cours">En cours</option>
-                  <option value="En attente">En attente</option>
-                  <option value="Terminé">Terminé</option>
-                </select>
+              <div className="mb-4">
+                <label className="form-label fw-bold text-muted small text-uppercase">Client / Entreprise</label>
+                <div className="input-group">
+                  <span className="input-group-text bg-light border-end-0"><Building size={18} /></span>
+                  <input 
+                    type="text" 
+                    name="client"
+                    className="form-control form-control-lg border-start-0 bg-light shadow-none" 
+                    value={formData.client}
+                    onChange={handleChange}
+                    required 
+                  />
+                </div>
               </div>
 
-              {/* BOUTONS D'ACTION */}
+              <div className="row g-3 mb-5">
+                <div className="col-md-6">
+                  <label className="form-label fw-bold text-muted small text-uppercase">Date de début</label>
+                  <div className="input-group">
+                    <span className="input-group-text bg-light border-end-0"><Calendar size={18} /></span>
+                    <input 
+                      type="text" 
+                      name="date"
+                      className="form-control border-start-0 bg-light shadow-none" 
+                      value={formData.date}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label className="form-label fw-bold text-muted small text-uppercase">Statut Actuel</label>
+                  <select 
+                    name="statut"
+                    className="form-select border-info border-opacity-25 bg-light fw-bold"
+                    value={formData.statut}
+                    onChange={handleChange}
+                  >
+                    <option value="Disponible">Disponible (Rouge)</option>
+                    <option value="En attente">En attente (Jaune)</option>
+                    <option value="En cours">En cours (Vert)</option>
+                    <option value="Terminé">Terminé (Gris)</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="d-grid gap-3">
-                <button type="submit" className="btn btn-primary btn-lg fw-bold d-flex align-items-center justify-content-center gap-2 shadow">
-                  <Save size={20} /> Enregistrer les modifications
+                <button type="submit" className="btn btn-info text-white btn-lg fw-bold py-3 shadow d-flex align-items-center justify-content-center gap-2">
+                  <Save size={20} /> Enregistrer les changements
                 </button>
                 <button 
                   type="button" 
-                  className="btn btn-outline-danger btn-lg fw-bold d-flex align-items-center justify-content-center gap-2"
+                  className="btn btn-outline-secondary btn-lg fw-bold py-3"
                   onClick={() => navigate('/gestion-projets')}
                 >
-                  <X size={20} /> Annuler
+                  Annuler
                 </button>
               </div>
             </form>

@@ -26,6 +26,10 @@ function App() {
     setProjets([...projets, { ...nouveau, id: projets.length + 1 }]);
   };
 
+  const modifierProjet = (projetMisAJour) => {
+  setProjets(projets.map(p => p.id === projetMisAJour.id ? projetMisAJour : p));
+};
+
   const supprimerProjet = (id) => {
     setProjets(projets.filter(p => p.id !== id));
   };
@@ -45,7 +49,7 @@ function App() {
         {/* Gestion Projets (Versions avec PROPS uniquement) */}
         <Route path="/gestion-projets" element={<GestionProjets projets={projets} supprimerProjet={supprimerProjet} />} />
         <Route path="/creer-projet" element={<CreerProjet ajouterProjet={ajouterProjet} />} />
-        <Route path="/modifier-projet/:id" element={<ModifierProjet projets={projets} setProjets={setProjets} />} />
+        <Route path="/modifier-projet/:id" element={<ModifierProjet projets={projets} modifierProjet={modifierProjet} />} />
         <Route path="/suivi-projet/:id" element={<SuiviProjetChef />} />
 
         {/* Autres fonctionnalités */}

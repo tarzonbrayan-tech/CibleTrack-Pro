@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FolderCanvas, Users, UserCheck, LogOut, Shield, UserCircle } from 'lucide-react';
+import { LayoutDashboard, Users, LogOut, Shield, UserCircle } from 'lucide-react';
 
 const DashboardChef = () => {
   const navigate = useNavigate();
