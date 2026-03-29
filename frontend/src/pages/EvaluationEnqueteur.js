@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Save, Star, ClipboardList, Award } from 'lucide-react';
 
-const EvaluationEnqueteur = () => {
+const EvaluationEnqueteur = ({ enqueteurs = [] }) => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [enqueteur, setEnqueteur] = useState(null);
+
+  // Chercher l'enquêteur correspondant à l'ID
+  useEffect(() => {
+    const cible = enqueteurs.find(e => e.id === parseInt(id));
+    if (cible) setEnqueteur(cible);
+  }, [id, enqueteurs]);
   
   // Tes 10 critères spécifiques
   const criteres = [
@@ -25,6 +33,8 @@ const EvaluationEnqueteur = () => {
     setNotes({ ...notes, [critereId]: valeur });
   };
 
+  if (!enqueteur) return <div className="p-5 text-center">Chargement de l'agent...</div>;
+
   return (
     <div className="container py-5">
       {/* En-tête */}
@@ -34,7 +44,7 @@ const EvaluationEnqueteur = () => {
         </button>
         <div>
           <h1 className="h2 mb-0 text-dark">Évaluation Enquêteur</h1>
-          <p className="text-muted mb-0">Agent : <span className="fw-bold text-primary">Paul Biya</span></p>
+          <p className="text-muted mb-0">Agent : <span className="fw-bold text-primary">{enqueteur.nom} {enqueteur.prenom}</span></p>
         </div>
       </div>
 
