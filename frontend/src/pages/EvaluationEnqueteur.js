@@ -104,15 +104,38 @@ const EvaluationEnqueteur = ({ enqueteurs = [] }) => {
 
         {/* Boutons d'action */}
         <div className="mt-5 d-flex gap-3 justify-content-end">
-          <button className="btn btn-light px-4 py-2 border fw-bold" onClick={() => navigate('/gestion-enqueteurs')}>
-            Annuler
-          </button>
           <button 
-            className="btn btn-primary px-5 py-2 d-flex align-items-center gap-2 shadow fw-bold" 
-            onClick={() => {alert("Évaluation de l'enquêteur sauvegardée !"); navigate('/gestion-enqueteurs');}}
-          >
-            <Save size={18} /> Enregistrer l'évaluation
-          </button>
+  className="btn btn-light px-4 py-2 border fw-bold" 
+  onClick={() => {
+    const role = localStorage.getItem('userRole');
+    if (role === 'chef') {
+      navigate('/suivi-global-enqueteurs');
+    } else {
+      navigate('/superviseur-dashboard');
+    }
+  }}
+>
+  Annuler
+</button>
+          <button 
+  className="btn btn-primary px-5 py-2 d-flex align-items-center gap-2 shadow fw-bold" 
+  onClick={() => {
+    // 1. On récupère le rôle stocké lors du Login
+    const role = localStorage.getItem('userRole'); 
+
+    // 2. Message de succès
+    alert(`Évaluation de l'agent ${enqueteur.nom} sauvegardée !`);
+
+    // 3. Redirection selon le profil
+    if (role === 'chef') {
+      navigate('/suivi-global-enqueteurs'); // Retour au tableau de bord général
+    } else {
+      navigate('/superviseur-dashboard'); // Retour à l'espace superviseur
+    }
+  }}
+>
+  <Save size={18} /> Enregistrer l'évaluation
+</button>
         </div>
       </div>
     </div>

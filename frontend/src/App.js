@@ -19,6 +19,7 @@ import ModifierProfil from './pages/ModifierProfil';
 import CreerProjet from './pages/CreerProjet';
 import SuiviGlobalEnqueteurs from './pages/SuiviGlobalEnqueteurs';
 import ModifierEnqueteur from './pages/ModifierEnqueteur';
+import DetailsEnqueteur from './pages/DetailsEnqueteur';
 
 function App() {
   // SOURCE DE VÉRITÉ UNIQUE
@@ -37,8 +38,8 @@ function App() {
   };
 
   const [enqueteurs, setEnqueteurs] = useState([
-  { id: 1, matricule: "ENQ-001", nom: "EBOGO", prenom: "Jean", telephone: "699887766", ville: "Yaoundé", niveau: "LICENSE", domaine: "Sociologie", genre: "Masculin", experience: "Intermédiaire", statut: "Bien" }
-]);
+    { id: 1, matricule: "ENQ-001", nom: "EBOGO", prenom: "Jean", telephone: "699887766", ville: "Yaoundé", niveau: "LICENSE", domaine: "Sociologie", genre: "Masculin", experience: "Intermédiaire", statut: "Bien" }
+  ]);
 
 const modifierEnqueteur = (enqMisAJour) => {
   setEnqueteurs(enqueteurs.map(e => e.id === enqMisAJour.id ? enqMisAJour : e));
@@ -73,6 +74,8 @@ const modifierEnqueteur = (enqMisAJour) => {
         <Route path="/suivi-global-enqueteurs" element={<SuiviGlobalEnqueteurs enqueteurs={enqueteurs} />} />
         <Route path="/modifier-enqueteur/:id" element={<ModifierEnqueteur enqueteurs={enqueteurs} modifierEnqueteur={modifierEnqueteur} />} />
         <Route path="/evaluation-enqueteur/:id" element={<EvaluationEnqueteur enqueteurs={enqueteurs} />} />
+        <Route path="/details-enqueteur/:id" element={<DetailsEnqueteur enqueteurs={enqueteurs} />} />
+
         {/* 404 */}
         <Route path="*" element={<h2 className="p-5 text-center">404 - Page non trouvée</h2>} />
       </Routes>

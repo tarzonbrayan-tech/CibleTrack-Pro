@@ -4,6 +4,8 @@ import {
   ArrowLeft, Search, Filter, Eye, Edit, Star, 
   User, GraduationCap, Briefcase, MapPin 
 } from 'lucide-react';
+import ExportImportData from '../components/ExportImportData';
+import OutilsFichiers from '../components/OutilsFichiers';
 
 const SuiviGlobalEnqueteurs = () => {
   const navigate = useNavigate();
@@ -58,6 +60,14 @@ const SuiviGlobalEnqueteurs = () => {
 
   return (
     <div className="container-fluid py-4 bg-light min-vh-100">
+      <ExportImportData 
+  data={filteredEnqueteurs} 
+  onImport={(newData) => {
+    // Logique pour ajouter les nouveaux enquêteurs à votre état global
+    console.log("Données importées :", newData);
+  }} 
+/>
+
       {/* En-tête */}
       <div className="d-flex align-items-center gap-3 mb-4">
         <button className="btn btn-outline-dark rounded-circle" onClick={() => navigate('/chef-dashboard')}>
@@ -122,6 +132,22 @@ const SuiviGlobalEnqueteurs = () => {
           </div>
         </div>
       </div>
+
+      <OutilsFichiers 
+  data={filteredEnqueteurs} 
+  onImport={(nouveauxData) => {
+    // 1. On nettoie ou formate si besoin (ex: forcer un ID unique)
+    const dataAvecIds = nouveauxData.map((enq, index) => ({
+      ...enq,
+      id: Date.now() + index // Génère un ID unique temporaire
+    }));
+
+    // 2. On met à jour l'état global (en supposant que tu as setEnqueteurs)
+    setEnqueteurs([...enqueteurs, ...dataAvecIds]);
+    
+    alert(`${nouveauxData.length} enquêteurs ajoutés à la base !`);
+  }} 
+/>
 
       {/* Tableau des Enquêteurs */}
       <div className="card shadow border-0 overflow-hidden">
