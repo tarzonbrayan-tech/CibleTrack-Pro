@@ -21,14 +21,15 @@ function Login() {
 
       if (response.data.status === "success") {
         // 1. On stocke les infos dans le navigateur (pour s'en souvenir)
+        localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('userRole', response.data.role);
         localStorage.setItem('userEmail', email);
 
         // 2. Redirection automatique selon le rôle reçu de Python
         if (response.data.role === 'chef') {
-          navigate('/chef-dashboard'); // <--- Ajoute "-dashboard" ici
+          navigate('/chef-dashboard'); 
         } else if (response.data.role === 'superviseur') {
-          navigate('/superviseur-dashboard'); // <--- Ajoute "-dashboard" ici
+          navigate('/superviseur-dashboard');
         }
       }
     } catch (error) {
@@ -61,3 +62,4 @@ function Login() {
 }
 
 export default Login;
+

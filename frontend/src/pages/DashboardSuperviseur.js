@@ -5,6 +5,15 @@ import { UserCircle, Users, LogOut, ClipboardList } from 'lucide-react';
 const DashboardSuperviseur = () => {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // ÉTAPE 1 : On vide la mémoire du navigateur
+    localStorage.clear(); 
+    
+    // ÉTAPE 2 : On redirige vers le login
+    // L'utilisateur ne pourra plus revenir en arrière car 'isAuthenticated' sera vide
+    navigate('/login'); 
+  };
+
   // Données de démonstration
   const stats = {
     nbEnqueteurs: 12,
@@ -23,9 +32,9 @@ const DashboardSuperviseur = () => {
           >
             <UserCircle size={20} /> Modifier mon profil
           </button>
-          <button className="btn btn-danger btn-sm shadow-sm" onClick={() => navigate('/login')}>
-            <LogOut size={18} />
-          </button>
+          <button className="btn btn-danger d-flex align-items-center gap-2" onClick={handleLogout}>
+          <LogOut size={18} /> Déconnexion
+        </button>
         </div>
       </nav>
 

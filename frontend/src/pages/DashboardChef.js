@@ -5,6 +5,15 @@ import { LayoutDashboard, Users, LogOut, Shield, UserCircle } from 'lucide-react
 const DashboardChef = () => {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // ÉTAPE 1 : On vide la mémoire du navigateur
+    localStorage.clear(); 
+    
+    // ÉTAPE 2 : On redirige vers le login
+    // L'utilisateur ne pourra plus revenir en arrière car 'isAuthenticated' sera vide
+    navigate('/login'); 
+  };
+
   // Statistiques globales (Maquette)
   const globalStats = {
     nbProjets: 4,
@@ -28,12 +37,9 @@ const DashboardChef = () => {
           </button>
 
           {/* BOUTON DÉCONNEXION ROUGE */}
-          <button 
-            className="btn btn-danger d-flex align-items-center gap-2 shadow-sm" 
-            onClick={() => navigate('/login')}
-          >
-            <LogOut size={18} /> Déconnexion
-          </button>
+          <button className="btn btn-danger d-flex align-items-center gap-2" onClick={handleLogout}>
+          <LogOut size={18} /> Déconnexion
+        </button>
         </div>
       </nav>
 
